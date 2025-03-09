@@ -24,6 +24,8 @@ class Item:
     
     # - - - - - - - - - - - - - - - - - - - - - - - - 
     
+    # Devuelve los datos para su uso en las demás clases
+
     def get_alias(self):
         return self.alias
 
@@ -35,3 +37,8 @@ class Item:
 
     def get_rsrc(self):
         return self.rsrc
+
+    # - - - - - - - - - - - - - - - - - - - - - - - - 
+
+    def __str__(self):
+        return f"Objeto: {self.alias} (ID: {self.item_id})/nCantidad: {self.item_qty}/nRecursos: {self.rsrc}"
