@@ -16,4 +16,8 @@ class Controller:
     def make_request(self):
         url = "https://west.albion-online-data.com/api/v2/stats/prices/T4_BAG,T5_BAG?locations=Martlock&qualities=1"
         self.api_mng.send_request(url)
+    
+    # metodo para obtener el precio promedio dado el id de un objeto
+    def get_avg_price(self, obj_id: str) -> float:
+        pass
 

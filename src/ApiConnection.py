@@ -15,6 +15,7 @@ class ApiConnection:
             # Convertir la respuesta a lista de diccionarios (JSON)
             datos = respuesta.json()  # Esto será una lista de objetos (diccionarios)
             
+            print(type(datos[0]))
             # Procesar los datos
             for item in datos:
                 # Acceder a las propiedades de cada objeto JSON
