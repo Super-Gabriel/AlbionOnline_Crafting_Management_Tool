@@ -1,25 +1,25 @@
 # archivo para implementar la clase item
 class Item:
     def __init__(self):
-        self.alias = ""
-        self.item_id = ""
-        self.item_qty = 0
-        self.rsrc = {}
+        self.alias: str
+        self.item_id: str
+        self.item_qty: int
+        self.rsrc: dict
     
     # Definir el nombre del objeto
-    def set_alias(self, alias):
+    def set_alias(self, alias: str):
         self.alias = alias
 
      # Definir el ID del objeto
-    def set_item_id(self, item_id):
+    def set_item_id(self, item_id: str):
         self.item_id = item_id
     
      # Definir la cantidad a craftear del objeto
-    def set_item_qty(self, item_qty):
+    def set_item_qty(self, item_qty: int):
         self.item_qty = item_qty
     
      # Definir los recursos 
-    def set_rsrc(self, rsrc):
+    def set_rsrc(self, rsrc: dict):
         self.rsrc = rsrc
     
     # - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -40,5 +40,11 @@ class Item:
 
     # - - - - - - - - - - - - - - - - - - - - - - - - 
 
+    def get_dict_format(self, dict: dict):
+        format = ""
+        for clave, valor in dict.items():
+            format += f"{clave} : {valor}\n"
+        return format
+            
     def __str__(self):
-        return f"Objeto: {self.alias} (ID: {self.item_id})/nCantidad: {self.item_qty}/nRecursos: {self.rsrc}"
+        return f"Objeto: {self.alias} (ID: {self.item_id})\nCantidad: {self.item_qty}\nRecursos: \n{self.get_dict_format(self.rsrc)}"
