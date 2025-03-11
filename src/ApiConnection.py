@@ -5,6 +5,7 @@ class ApiConnection:
     # metodo para mandar una solicitud a un api
     def send_request(self, url: str): 
         print("enviando solicitud")
+        print(url)
         try:
             # Hacer la solicitud GET
             respuesta = requests.get(url)
@@ -14,13 +15,11 @@ class ApiConnection:
             
             # Convertir la respuesta a lista de diccionarios (JSON)
             datos = respuesta.json()  # Esto será una lista de objetos (diccionarios)
-            
-            print(type(datos[0]))
+        
             # Procesar los datos
-            for item in datos:
+            for item in reversed(datos):
                 # Acceder a las propiedades de cada objeto JSON
-                print(item)  # Ejemplo: imprime cada elemento de la lista
-                print("\n")
+                return datos
                 
         except requests.exceptions.HTTPError as errh:
             print(f"Error HTTP: {errh}")

@@ -22,8 +22,33 @@ class Controller:
 
     # metodo para hacer una request al api mediante url
     def make_request(self):
-        url = "https://west.albion-online-data.com/api/v2/stats/prices/T4_BAG,T5_BAG?locations=Martlock&qualities=1"
-        self.api_mng.send_request(url)
+        mtk = "Martlock"
+        tfd = "Thetford"
+        fsg = "Fort%20Sterling"
+        lht = "Lymhurst"
+        bwh = "Bridgewatch"
+        bcn = "Brecilien"
+
+        cities = "" + mtk + "," + tfd + "," + fsg + "," + lht + "," + bwh + "," + bcn
+        # - - - - - - - - - - - - - - - - - - - - - - - 
+        item_id = []
+
+        # Almacenando los IDs en una lista
+        for item in self.item_list:
+            item_id.append(item.get_item_id())
+        
+        items_str = ",".join(item_id)
+
+        # - - - - - - - - - - - - - - - - - - - - - - - 
+        
+        # Hacemos una solicitud a la API y posteriormente guardamos los datos en api_data
+        url = "https://west.albion-online-data.com/api/v2/stats/prices/" + items_str + "?locations=" + cities + ",&qualities=0"
+        self.api_data = self.api_mng.send_request(url)
+        
+        for item in reversed(self.api_data):
+            print(item)
+            print("\n")
+        
 
     #metodo para desarrollar la prueba actual
     def current_test(self):
