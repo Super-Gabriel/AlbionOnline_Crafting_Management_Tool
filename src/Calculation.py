@@ -3,7 +3,7 @@ class Calculation:
     def __init__(self):
         pass
 
-    def get_promedio(self, lista) -> float:
+    def get_promedio(self, lista: list) -> float:
         return sum(lista) / len(lista)
     
     
@@ -19,7 +19,7 @@ class Calculation:
         
         return lista
     # metodo auxiliar para verificar si se saca o no un valor minimo
-    def verify_substract_min(self, min_elem, lista) -> bool:
+    def verify_substract_min(self, min_elem: float, lista: list) -> bool:
         result = True
         contador_true = 0
         contador_false = 0
@@ -47,7 +47,7 @@ class Calculation:
             max_e = max(lista)# nuevo elemento minimo
         return lista
     # metodo auxiliar para verificar si se saca o no un valor máximo
-    def verify_substract_max(self, max_elem, lista) -> bool:
+    def verify_substract_max(self, max_elem: float, lista: list) -> bool:
         result = True
         contador_true = 0
         contador_false = 0
@@ -66,3 +66,11 @@ class Calculation:
             result = False
     
         return result
+    
+    # Método que devuelve los gastos al comprar cierta cantidad de recursos
+    def get_expense(self, rsrc_qty: float, avg_p: float) -> float:
+        return rsrc_qty * avg_p
+    
+    # Método que devuelve el profit total restando los gastos de la ganancia
+    def get_profit(self, expenses: float, earnings: float) -> float:
+        return earnings - expenses
