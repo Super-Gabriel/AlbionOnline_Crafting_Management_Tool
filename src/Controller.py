@@ -19,7 +19,7 @@ class Controller:
             max_price = item.get("sell_price_max")
             lista.append(min_price)
             lista.append(max_price)        
-        print(lista)
+        #print(lista)
         lista = self.calc_mng.substract_min(lista)
         lista = self.calc_mng.substract_max(lista)
         #print(lista)
