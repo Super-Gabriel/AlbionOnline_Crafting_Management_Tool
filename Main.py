@@ -43,7 +43,7 @@ if __name__ == "__main__":
     
     driver = Controller()
 
-    driver.set_item_list([i1,i2])
+    driver.set_item_list([i1, i2])
     driver.set_cities(cities)
     driver.set_quality(quality)
     driver.set_p(p)

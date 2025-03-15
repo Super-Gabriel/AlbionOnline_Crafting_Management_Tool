@@ -3,13 +3,7 @@ import requests
 class ApiConnection:
     def __init__(self):
         self.url: str
-
-    # metodo para mandar una solicitud a un api
-    def send_request_1(self, url: str): 
-        print("enviando solicitud")
-        print(url)
         
-
     # metodo para hacer una request dado un id, ciudades y calidad, regresa un dict con la respuesta de la api
     def send_request(self, id: str, cities: str, quality: int) -> dict[dict]:
         datos = None
