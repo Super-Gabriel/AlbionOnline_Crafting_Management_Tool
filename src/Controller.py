@@ -72,16 +72,18 @@ class Controller:
     def get_optimal_city(self, prices: list, cities: list) -> list:
         result=[]
         prices_cleaned = self.calc_mng.substract_max(self.calc_mng.substract_min(prices))
-        optimal_price_index = prices.index(min(prices_cleaned))
-        result = [prices[optimal_price_index], cities[optimal_price_index]]
+        if prices_cleaned:
+            optimal_price_index = prices.index(min(prices_cleaned))
+            result = [prices[optimal_price_index], cities[optimal_price_index]]
         return result
 
     # metodo para obtener [precio_más_alto, ciudad] dada una lista de precios y una lista de ciudades
     def get_worst_city(self, prices: list, cities: list) ->list :
         result=[]
         prices_cleaned = self.calc_mng.substract_max(self.calc_mng.substract_min(prices))
-        optimal_price_index = prices.index(max(prices_cleaned))
-        result = [prices[optimal_price_index], cities[optimal_price_index]]
+        if prices_cleaned:
+            optimal_price_index = prices.index(max(prices_cleaned))
+            result = [prices[optimal_price_index], cities[optimal_price_index]]
         return result
 
     # metodo para obtener la lista de precios y su ciudad dado un id
@@ -143,6 +145,7 @@ class Controller:
                        profit: float) -> dict:
         
         rsrc_info_dict = {}
+        percent = profit * (100/total_expenses)
         contador = 1
         for id, total_rsrc, avg_rsrc_price in zip(rsrc_ids, total_rsrc, avg_rsrc_prices):
             rsrc_info_dict[f'rsrc{contador}_name'] = id
@@ -160,7 +163,7 @@ class Controller:
         result['total_expenses'] = total_expenses
         result['earnings'] = earnings
         result['profit'] = profit
-        
+        result["%"] = percent
         return result
     
     # Método para obtener las keys de un dict
