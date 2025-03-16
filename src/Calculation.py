@@ -11,18 +11,19 @@ class Calculation:
     
     # metodo para substraer valores minimos innecesarios de una lista de precios
     def substract_min(self, lista: list) -> list:
-        if lista:
-            min_e = min(lista) # primer elemento minimo
+        result = list(lista)
+        if result:
+            min_e = min(result) # primer elemento minimo
             #print(f"primer minimo: {min_e}\n verificando con lista: {lista}")
-            while(self.verify_substract_min(min_e,lista)):
+            while(self.verify_substract_min(min_e,result)):
                 #print("se saca!")
-                lista.remove(min_e)# removiendo el elemento minimo
-                if not lista:
+                result.remove(min_e)# removiendo el elemento minimo
+                if not result:
                     break
-                min_e = min(lista)# nuevo elemento minimo
+                min_e = min(result)# nuevo elemento minimo
                 #print(f"siguiente minimo: {min_e}\n veficando con lista: {lista}")
             
-        return lista
+        return result
     # metodo auxiliar para verificar si se saca o no un valor minimo
     def verify_substract_min(self, min_elem: float, lista: list) -> bool:
         result = True
@@ -46,14 +47,15 @@ class Calculation:
 
     # metodo para substraer valores maximos innecesarios de una lista de precios
     def substract_max(self, lista: list) -> list:
-        if lista:
-            max_e = max(lista) # primer elemento minimo
-            while(self.verify_substract_max(max_e,lista)):
-                lista.remove(max_e)# removiendo el elemento minimo
-                if not lista:
+        result = list(lista)
+        if result:
+            max_e = max(result) # primer elemento minimo
+            while(self.verify_substract_max(max_e,result)):
+                result.remove(max_e)# removiendo el elemento minimo
+                if not result:
                     break
-                max_e = max(lista)# nuevo elemento minimo
-        return lista
+                max_e = max(result)# nuevo elemento 
+        return result
     # metodo auxiliar para verificar si se saca o no un valor máximo
     def verify_substract_max(self, max_elem: float, lista: list) -> bool:
         result = True
