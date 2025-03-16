@@ -31,7 +31,7 @@ i1.set_rsrc(i1_dict)
 
 i2.set_alias("hacha de guerra")
 i2.set_item_id("T5_MAIN_AXE@1")
-i2.set_item_qty(500)
+i2.set_item_qty(20)
 i2_dict = {
     "T5_PLANKS_LEVEL1@1" : 8,
     "T5_METALBAR_LEVEL1@1" : 16,
