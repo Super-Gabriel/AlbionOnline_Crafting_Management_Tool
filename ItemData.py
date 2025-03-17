@@ -2,7 +2,7 @@ from src.Item import Item
 import copy
 items = []
 quality = 0
-p = 0.248
+p = 0.24
 cities = ",".join([
     "Martlock",
     "Thetford",

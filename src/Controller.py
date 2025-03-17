@@ -16,10 +16,11 @@ class Controller:
     def main_algorithm(self):
         profits = []
         for item in self.item_list:
+            item_alias = item.get_alias()
             item_id = item.get_item_id()
             item_qty = item.get_item_qty()
             item_rsrc = item.get_rsrc()
-            item_profit = self.calculate_profit(item_id, item_qty, item_rsrc)
+            item_profit = self.calculate_profit(item_alias, item_id, item_qty, item_rsrc)
             item_name = item.get_alias()
             profits.append([item_name, item_profit])
         
@@ -33,7 +34,7 @@ class Controller:
         #print(profits)
 
     # metodo para calcular el profit de un item especifico
-    def calculate_profit(self, item_id: str, qty: int, rsrc: dict) -> float:
+    def calculate_profit(self, item_alias: str, item_id: str, qty: int, rsrc: dict) -> float:
         rsrc_buy_cities = []
 
         total_rsrc = []
@@ -63,7 +64,7 @@ class Controller:
 
         rsrc_ids = self.get_dict_keys(rsrc)
         # construyendo y guardando el log_dict
-        log_dict = self.build_log_dict(item_id, qty, item_price, item_sell_city, rsrc_ids, total_rsrc, avg_rsrc_prices, rsrc_buy_cities, total_expenses, earnings, profit)
+        log_dict = self.build_log_dict(item_alias, item_id, qty, item_price, item_sell_city, rsrc_ids, total_rsrc, avg_rsrc_prices, rsrc_buy_cities, total_expenses, earnings, profit)
         self.logs.append(log_dict)
         
         return profit
@@ -132,6 +133,7 @@ class Controller:
 
     # Método para construir un log_dict
     def build_log_dict(self, 
+                       item_alias: str, 
                        item_id: str, 
                        qty: int, 
                        item_price: float,
@@ -145,17 +147,20 @@ class Controller:
                        profit: float) -> dict:
         
         rsrc_info_dict = {}
-        percent = profit * (100/total_expenses)
+        percent = 0
+        if total_expenses != 0:
+            percent = profit * (100/total_expenses)
         contador = 1
         for id, total_rsrc, avg_rsrc_price in zip(rsrc_ids, total_rsrc, avg_rsrc_prices):
-            rsrc_info_dict[f'rsrc{contador}_name'] = id
+            rsrc_info_dict[f'rsrc{contador}_id'] = id
             rsrc_info_dict[f'rsrc{contador}_qty'] = total_rsrc
             rsrc_info_dict[f'rsrc{contador}_avg_price'] = avg_rsrc_price
             rsrc_info_dict[f'rsrc{contador}_optimal_city'] = rsrc_buy_cities[contador-1]
             contador += 1
 
         result = {}
-        result['item_name'] = item_id
+        result['item_alias'] = item_alias
+        result['item_id'] = item_id
         result['item_qty'] = qty
         result['item_avg_price'] = item_price
         result['optimal_city'] = item_sell_city
@@ -184,8 +189,11 @@ class Controller:
         print("______________________________________________________________________")
 
     def show_inside_dict(self, dct: dict):
+        print()
         for clave, valor in dct.items():
             print(f"\t\t{clave} : {valor}")
+            if clave.endswith("optimal_city"):
+                print()
 
     ## setters _______________________________________________________________________
     def set_item_list(self, item_list: list):
