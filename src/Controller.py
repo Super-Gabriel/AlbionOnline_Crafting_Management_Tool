@@ -14,24 +14,14 @@ class Controller:
         self.logs = []
 
     def main_algorithm(self):
-        profits = []
         for item in self.item_list:
             item_alias = item.get_alias()
             item_id = item.get_item_id()
             item_qty = item.get_item_qty()
             item_rsrc = item.get_rsrc()
-            item_profit = self.calculate_profit(item_alias, item_id, item_qty, item_rsrc)
-            item_name = item.get_alias()
-            profits.append([item_name, item_profit])
+            self.calculate_profit(item_alias, item_id, item_qty, item_rsrc)
         
-        for i in range(len(self.item_list)):
-            self.show_dict(self.logs[i])
-            print("\n")
-        
-        df_log = self.api_mng.get_df_log()
-
-        #print(self.logs)
-        #print(profits)
+        #df_log = self.api_mng.get_df_log()
 
     # metodo para calcular el profit de un item especifico
     def calculate_profit(self, item_alias: str, item_id: str, qty: int, rsrc: dict) -> float:
@@ -169,6 +159,7 @@ class Controller:
         result['earnings'] = earnings
         result['profit'] = profit
         result["%"] = percent
+
         return result
     
     # Método para obtener las keys de un dict
@@ -195,6 +186,12 @@ class Controller:
             if clave.endswith("optimal_city"):
                 print()
 
+    # metodo para mostrar los log_dicts
+    def show_log_dicts(self):
+        for i in self.logs:
+            self.show_dict(i)
+            print("\n")
+
     ## setters _______________________________________________________________________
     def set_item_list(self, item_list: list):
         self.item_list = item_list
@@ -204,3 +201,5 @@ class Controller:
         self.quality = quality
     def set_p(self, p: float):
         self.p = p
+    def set_logs(self, logs: list):
+        self.logs = logs
