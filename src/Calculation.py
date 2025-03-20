@@ -79,8 +79,10 @@ class Calculation:
     
     # Método para calcular la cantidad de recursos tomando en cuenta el porcentaje de devolución p
     def calculate_rsrc(self, n_objects: int, rsrc_qty: int, p: float) -> float:
-        magic_v = rsrc_qty - (rsrc_qty * p)
-        result = n_objects * magic_v
+        result = n_objects
+        if rsrc_qty > 1:
+            magic_v = rsrc_qty - (rsrc_qty * p)
+            result = n_objects * magic_v
         return result
 
     # Método que devuelve los gastos al comprar cierta cantidad de recursos
